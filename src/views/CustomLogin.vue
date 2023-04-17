@@ -24,15 +24,16 @@
   </CustomForm>
   <div class="col-md-12 cadastrar">
     <p>Ainda não tem conta?</p>
-    <a href="/">Cadastre-se</a>
+    <router-link to="/planos">Cadastre-se</router-link>
   </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import CustomForm from './components/CustomForm.vue'
+import CustomForm from '../components/CustomForm.vue'
 
 export default {
-  name: 'App',
+  name: 'CustomLogin',
   components: {
     CustomForm
   },
@@ -59,11 +60,11 @@ img {
   max-height: 67px;
 }
 
-.titulo h2{
+.titulo h2 {
   margin-bottom: 0 !important;
 }
 
-.titulo p{
+.titulo p {
   padding-top: 0% !important;
   margin-top: 0 !important;
   font-size: 1.8rem;
@@ -87,7 +88,7 @@ img {
 
 .cadastrar a {
   font-size: 1.8rem;
-  color: #F30168;
+  color: #F30168 !important;
 }
 
 .esqueciSenha a {
