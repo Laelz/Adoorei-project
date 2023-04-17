@@ -2,6 +2,7 @@
   <div class="col-md-12 imagem">
     <img alt="Vue logo" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
   </div>
+
   <CustomForm>
     <div class="col-md-12 titulo">
       <h2>Entre na sua conta</h2>
@@ -49,15 +50,6 @@ export default {
 #app {
   padding-top: 8vh !important;
   padding: 3%;
-}
-
-.imagem {
-  text-align: center;
-}
-
-img {
-  max-width: 176px;
-  max-height: 67px;
 }
 
 .titulo h2 {

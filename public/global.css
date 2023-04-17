@@ -22,8 +22,7 @@ body {
 
 body {
   font-size: 1.6rem;
-  background: #FAFAFC;
-
+  background-color: #FAFAFC !important;
 }
 
 h2 {
@@ -60,11 +59,16 @@ input::placeholder {
   font-size: 1.8rem;
 }
 
-@media (max-width: 425px) {
-  html {
-    font-size: 50%;
-  }
+.imagem {
+  text-align: center;
+}
 
+img {
+  max-width: 176px;
+  max-height: 67px;
+} 
+
+@media (max-width: 425px) {
   input {
     height: 60px;
   }
