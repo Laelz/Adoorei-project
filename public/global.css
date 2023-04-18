@@ -68,6 +68,27 @@ img {
   max-height: 67px;
 } 
 
+h4 {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 21px;
+  color: #666666;
+}
+
+ul {
+  list-style: url("../assets/check.svg");
+  color: #666666;
+  list-style-position: outside;
+
+}
+
+li {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 21px;
+  color: #666666;
+}
+
 @media (max-width: 425px) {
   input {
     height: 60px;

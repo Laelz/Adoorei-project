@@ -4,9 +4,6 @@
         <h2>Você está muito próximo de mudar a forma de <p>hospedar seu site</p>
         </h2>
     </div>
-    <div>
-
-    </div>
     <div class="hospedagem">
         <div class="card">
             <div class="card-body">
@@ -20,7 +17,7 @@
                     <p>Ideal para quem está começando.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-plan">ESCOLHER ESSE PLANO</button>
+                    <button type="button" class="btn btn-plan" @click="cadastrar(1)">ESCOLHER ESSE PLANO</button>
                 </div>
                 <div class="listagem">
                     <h4>Seu site em servidores no Estados Unidos.</h4>
@@ -72,7 +69,7 @@
                     <p>Ideal para site com mais mais de 30k de visitas.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-plan">ESCOLHER ESSE PLANO</button>
+                    <button type="button" class="btn btn-plan" @click="cadastrar(2)">ESCOLHER ESSE PLANO</button>
                 </div>
                 <div class="listagem">
                     <h4>Seu site em servidores no Brasil.</h4>
@@ -127,7 +124,7 @@
                     <p>Ideal para quem está começando.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-plan">ESCOLHER ESSE PLANO</button>
+                    <button type="button" class="btn btn-plan" @click="cadastrar(3)">ESCOLHER ESSE PLANO</button>
                 </div>
                 <div class="listagem">
                     <h4>Seu site em servidores no Brasil.
@@ -173,7 +170,12 @@ export default {
     name: 'ViewPlanos',
     data() {
         return {
-            nome: 'Lael'
+
+        }
+    },
+    methods: {
+        cadastrar(hospedagem) {
+            this.$router.push({ name: 'Cadastrar', query: { hospedagem } })
         }
     },
 }
@@ -235,7 +237,7 @@ export default {
     color: #666666;
 }
 
-.value-hospedagem{
+.value-hospedagem {
     display: flex;
     justify-content: center;
     align-items: baseline;

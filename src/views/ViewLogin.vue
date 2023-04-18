@@ -3,31 +3,30 @@
     <img alt="Vue logo" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
   </div>
 
-  <CustomForm>
+  <CustomForm class="login">
     <div class="col-md-12 titulo">
       <h2>Entre na sua conta</h2>
       <p>Para acessar sua conta informe seu e-mail e senha</p>
     </div>
     <div class="col-md-12 inputGroup">
       <label for="email" class="form-label">E-mail</label>
-      <input type="email" class="form-control" id="email" placeholder="Seu e-mail">
+      <input v-model="form.email" type="email" class="form-control" id="email" placeholder="Seu e-mail">
     </div>
     <div class="col-md-12 inputGroup">
       <label for="senha" class="form-label">Senha</label>
-      <input type="password" class="form-control" id="senha" placeholder="Sua senha">
+      <input v-model="form.senha" type="password" class="form-control" id="senha" placeholder="Sua senha">
     </div>
     <div class="col-md-12 esqueciSenha">
       <a href="/">Esqueci minha senha</a>
     </div>
     <div class="col-md-12 inputGroup">
-      <button type="submit" class="btn">FAZER LOGIN</button>
+      <button type="submit" @click="login()" class="btn">FAZER LOGIN</button>
     </div>
   </CustomForm>
   <div class="col-md-12 cadastrar">
     <p>Ainda não tem conta?</p>
     <router-link to="/planos">Cadastre-se</router-link>
   </div>
-  <router-view></router-view>
 </template>
 
 <script>
@@ -40,7 +39,15 @@ export default {
   },
   data() {
     return {
-      nome: 'Lael'
+      form:{
+        email: '', 
+        senha: '',
+      }
+    }
+  },
+  methods: {
+    login() {
+      console.log(this.form);
     }
   },
 }
@@ -50,6 +57,10 @@ export default {
 #app {
   padding-top: 8vh !important;
   padding: 3%;
+}
+
+.login {
+  margin: auto;
 }
 
 .titulo h2 {

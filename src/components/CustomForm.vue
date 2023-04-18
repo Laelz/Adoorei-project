@@ -1,5 +1,5 @@
 <template>
-  <form class="row g-3">
+  <form>
     <slot></slot>
   </form>
 </template>
@@ -7,6 +7,16 @@
 <script>
 export default {
   name: 'CustomForm',
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    submit(event){
+      this.$emit('submit', event)
+    }
+  },
 }
 </script>
 
@@ -18,7 +28,6 @@ form {
   border: 1px solid #E6EAF2;
   border-radius: 5px;
   background-color: #FFFFFF !important;
-  margin: auto;
 }
 
 </style>
