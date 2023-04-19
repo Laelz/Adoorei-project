@@ -4,7 +4,7 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: import ('../index.vue')
+    component: import('../index.vue')
   },
   {
     path: '/login',
@@ -20,6 +20,11 @@ const routes = [
     path: '/cadastrar',
     name: 'Cadastrar',
     component: import('../views/ViewCadastrar.vue')
+  },
+  {
+    path: '/inicio',
+    name: 'Inicio',
+    component: import('../views/ViewInicio.vue')
   }
 ]
 

@@ -1,51 +1,58 @@
 <template>
     <div class="col-md-12 imagem">
-        <img alt="Vue logo" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
+        <img alt="localweb" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
         <h2>Você está muito próximo de mudar a forma de <p>hospedar seu site</p>
         </h2>
     </div>
     <div class="cadastro">
-        <CustomForm>
+        <CustomForm class="formulario-cadastro">
             <div class="col-md-12 titulo">
                 <h2>Dados pessoais</h2>
                 <p>Informe seus dados pessoais para acesso à sua conta</p>
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="nome" class="form-label">Nome completo</label>
-                <input type="nome" class="form-control" id="nome" placeholder="Informe seu nome completo">
+                <input required v-model="form.nome" type="nome" class="form-control" id="nome"
+                    placeholder="Informe seu nome completo">
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="fone" class="form-label">Celular</label>
-                <input type="number" class="form-control" id="fone" data-inputmask-inputformat="(99) 99999-9999" />
+                <input required v-model="form.celular" type="number" class="form-control" id="fone"
+                    data-inputmask-inputformat="(99) 99999-9999" />
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email" placeholder="Seu e-mail">
+                <input required v-model="form.email" type="email" class="form-control" id="email" placeholder="Seu e-mail">
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="senha" class="form-label">Senha</label>
-                <input type="password2" class="form-control" id="senha">
+                <input required v-model="form.senha" type="password" class="form-control" id="senha">
                 <small class="text-muted">No mínimo 8 caracteres</small>
             </div>
             <div class="col-md-12 inputGroup">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password2" class="form-control" id="senha2">
+                <label for="senha" class="form-label">Confirmar senha</label>
+                <input @change="confirmarSenha()" required v-model="confirmacaoSenha" type="password" class="form-control" id="senha2">
+                <small v-if="!(confirmarSenha)" class="text-muted">As senhas devem ser iguais</small>
+                
             </div>
-            <div class="col-md-12 inputGroup site-form titulo">
+            <div class="col-md-12 inputGroup site-form titulo titulo-pessoal ">
                 <h2>Dados pessoais</h2>
                 <p>Informe seus dados pessoais para acesso à sua conta</p>
                 <label for="site" class="form-label">Nome do seu site</label>
-                <input type="text" class="form-control" id="site" placeholder="Meu site">
+                <input required v-model="form.site" type="text" class="form-control" id="site" placeholder="Meu site">
                 <small class="text-muted">Exatamente igual o título do seu site</small>
             </div>
             <div class="col-md-12 inputGroup check">
-                <input class="form-check-input" type="checkbox" value="" id="checkPoliticaPrivacidade">
+                <input required v-model="form.termos" class="form-check-input" type="checkbox" value=""
+                    id="checkPoliticaPrivacidade">
                 <label class="form-check-label" for="checkPoliticaPrivacidade">
-                    Ao concluir com seu cadastro você concorda com nossos termos de uso e politicas de privacidade.
+                    Ao concluir com seu cadastro você concorda com nossos <a href="/"> termos de uso</a> e <a href="/">
+                        politicas de
+                        privacidade.</a>
                 </label>
             </div>
             <div class="col-md-12 inputGroup">
-                <button type="submit" class="btn">FAZER LOGIN</button>
+                <button :disabled="!form.termos" class="btn" @click="cadastrar()">CRIAR CONTA</button>
             </div>
 
         </CustomForm>
@@ -61,7 +68,7 @@
                     <div class="mid-banner">
                         <p>Ideal para quem está começando.</p>
                     </div>
-                    <div class="listagem">
+                    <div class="listagem informacoes">
                         <h4>Seu site em servidores no Estados Unidos.</h4>
                         <ul>
                             <li>Servidores em nossos data center americanos;</li>
@@ -117,7 +124,7 @@
                         <p>Ideal para site com mais mais de 30k de visitas.</p>
                     </div>
 
-                    <div class="listagem">
+                    <div class="listagem informacoes">
                         <h4>Seu site em servidores no Brasil.</h4>
                         <ul>
                             <li>Servidores em nosso de São Paulo;</li>
@@ -179,7 +186,7 @@
                         <p>Ideal para quem está começando.</p>
                     </div>
 
-                    <div class="listagem">
+                    <div class="listagem informacoes">
                         <h4>Seu site em servidores no Brasil.
                         </h4>
                         <ul>
@@ -236,15 +243,34 @@ export default {
     data() {
         return {
             tipoHospedagem: 1,
+            form: {
+                nome: '',
+                celular: '',
+                email: '',
+                site: '',
+                termos: false,
+                senha: '',
+            },
+            confirmacaoSenha: null
         }
     },
     created() {
         this.tipoHospedagem = parseInt(this.$route.query.hospedagem)
     },
 
+
     methods: {
+        confirmarSenha() {
+            return this.confirmacaoSenha == this.form.senha ? true : false
+        },
         trocarPlano() {
             this.$router.push('Planos')
+        },
+        async cadastrar() {
+            await this.$store.commit('ADD_USER', { form: this.form, hospedagem: this.tipoHospedagem })
+        },
+        validarSenha() {
+
         }
     },
 
@@ -252,10 +278,6 @@ export default {
 </script>
   
 <style>
-#fone {
-    mask: '(99) 99999-9999';
-}
-
 .imagem h2 {
     font-weight: 700;
     font-size: 28px;
@@ -277,12 +299,11 @@ export default {
 }
 
 .card {
-    max-width: 348px;
     border: none;
 }
 
 .card-body {
-    padding: 8%;
+    /* padding: 8%; */
     background-color: #FFFFFF;
 }
 
@@ -348,21 +369,35 @@ export default {
     color: #666666;
 }
 
-
-.listagem {
-    text-align: start;
-    padding: 5%;
-}
-
 .gradient {
     -webkit-mask-image: linear-gradient(0deg, transparent 16px, red 300px);
     overflow: hidden;
+}
+
+.inputGroup {
+    margin-top: 1%;
+}
+
+small {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 18px;
+    color: #515D74;
 }
 
 button {
     height: 56px;
 }
 
+.titulo-pessoal {
+    border: 1px solid rgba(81, 93, 116, 0.3);
+    border-left: none;
+    border-right: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
 .titulo h2 {
     margin-bottom: 0 !important;
@@ -382,7 +417,12 @@ button {
 .cadastro {
     justify-content: center;
     display: flex;
+    margin: 3%;
     gap: 2%;
+}
+
+.formulario-cadastro {
+    padding: 2% !important;
 }
 
 .cadastro p {
@@ -410,6 +450,41 @@ button {
     font-weight: 400;
     font-size: 1.6rem;
     line-height: 20px;
+}
+
+.formulario-cadastro input {
+    height: 56px !important;
+}
+
+.check {
+    display: flex;
+    justify-content: space-between;
+    gap: 3%;
+}
+
+.check input {
+    width: 5%;
+    height: 19px !important;
+
+}
+
+
+@media (max-width: 425px) {
+    .cadastro {
+        flex-direction: column;
+    }
+    .card{
+        width: 100%;
+    }
+
+    .listagem{
+        display: none;
+    }
+
+    .hospedagem{
+        order: -1;
+        margin-bottom: 4%;
+    }
 }
 </style>
   

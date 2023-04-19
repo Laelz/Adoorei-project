@@ -1,8 +1,7 @@
 <template>
   <div class="col-md-12 imagem">
-    <img alt="Vue logo" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
+    <img alt="localweb" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
   </div>
-
   <CustomForm class="login">
     <div class="col-md-12 titulo">
       <h2>Entre na sua conta</h2>
@@ -20,7 +19,7 @@
       <a href="/">Esqueci minha senha</a>
     </div>
     <div class="col-md-12 inputGroup">
-      <button type="submit" @click="login()" class="btn">FAZER LOGIN</button>
+      <button :disabled="!(form.email && form.senha)" @click="login()" class="btn">FAZER LOGIN</button>
     </div>
   </CustomForm>
   <div class="col-md-12 cadastrar">
@@ -40,24 +39,22 @@ export default {
   data() {
     return {
       form:{
-        email: '', 
-        senha: '',
+        email: null, 
+        senha: null,
       }
     }
   },
   methods: {
     login() {
       console.log(this.form);
+      // this.$store.commit('login', this.form)
+      this.$router.push('Inicio')
     }
   },
 }
 </script>
 
 <style>
-#app {
-  padding-top: 8vh !important;
-  padding: 3%;
-}
 
 .login {
   margin: auto;

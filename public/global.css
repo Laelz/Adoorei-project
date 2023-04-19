@@ -15,9 +15,16 @@ html {
 html,
 body {
   height: 100vh;
-  font-family: "Saru";
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  padding: 3%;
+}
+
+.imagem{
+  padding-top: 2vh !important;
 }
 
 body {
@@ -63,10 +70,10 @@ input::placeholder {
   text-align: center;
 }
 
-img {
-  max-width: 176px;
-  max-height: 67px;
-} 
+.logo{
+  width: 176px;
+  height: 67px;
+}
 
 h4 {
   font-weight: 700;
@@ -88,6 +95,7 @@ li {
   line-height: 21px;
   color: #666666;
 }
+
 
 @media (max-width: 425px) {
   input {

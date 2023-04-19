@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-12 imagem">
-        <img alt="Vue logo" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
+        <img alt="localweb" class="logo" src="https://www.locaweb.com.br/images/locaweb.svg?v=1.15.85" />
         <h2>Você está muito próximo de mudar a forma de <p>hospedar seu site</p>
         </h2>
     </div>
@@ -19,7 +19,7 @@
                 <div>
                     <button type="button" class="btn btn-plan" @click="cadastrar(1)">ESCOLHER ESSE PLANO</button>
                 </div>
-                <div class="listagem">
+                <div class="informacoes">
                     <h4>Seu site em servidores no Estados Unidos.</h4>
                     <ul>
                         <li>Servidores em nossos data center americanos;</li>
@@ -71,7 +71,7 @@
                 <div>
                     <button type="button" class="btn btn-plan" @click="cadastrar(2)">ESCOLHER ESSE PLANO</button>
                 </div>
-                <div class="listagem">
+                <div class="informacoes">
                     <h4>Seu site em servidores no Brasil.</h4>
                     <ul>
                         <li>Servidores em nosso de São Paulo;</li>
@@ -126,7 +126,7 @@
                 <div>
                     <button type="button" class="btn btn-plan" @click="cadastrar(3)">ESCOLHER ESSE PLANO</button>
                 </div>
-                <div class="listagem">
+                <div class="informacoes">
                     <h4>Seu site em servidores no Brasil.
                     </h4>
                     <ul>
@@ -189,6 +189,7 @@ export default {
     gap: 2%;
 }
 
+
 .imagem h2 {
     font-weight: 700;
     font-size: 28px;
@@ -203,19 +204,12 @@ export default {
     text-decoration: underline;
 }
 
-@media (max-width: 425px) {
-    .hospedagem {
-        display: grid;
-    }
-}
-
 .card {
-    max-width: 348px;
     border: none;
 }
 
 .card-body {
-    padding: 8%;
+    /* padding: 8%; */
     background-color: #FFFFFF;
 }
 
@@ -282,7 +276,7 @@ export default {
 }
 
 
-.listagem {
+.informacoes {
     text-align: start;
     padding: 5%;
 }
