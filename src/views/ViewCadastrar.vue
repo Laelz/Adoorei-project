@@ -300,12 +300,6 @@ export default {
     text-decoration: underline;
 }
 
-@media (max-width: 425px) {
-    .hospedagem {
-        display: grid;
-    }
-}
-
 .card {
     border: none;
 }
@@ -471,7 +465,7 @@ button {
 }
 
 .check input {
-    width: 5%;
+    min-width: 21px !important;
     height: 19px !important;
 
 }
@@ -485,6 +479,11 @@ button {
     .card {
         width: 100%;
     }
+
+    .card-body {
+        max-width: 361px;
+    }
+
 
     .listagem {
         display: none;

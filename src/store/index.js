@@ -11,7 +11,7 @@ export default createStore({
       return state.currentUser
     },
     getLetra(state) {
-      return state.currentUser.username.substring(0, 1)
+      return state.currentUser.username.substring(0, 1).toUpperCase()
     }
   },
   mutations: {

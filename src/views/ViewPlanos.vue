@@ -206,7 +206,9 @@ export default {
 
 .card {
     border: none;
+    max-width: 348px;
 }
+
 
 .card-body {
     /* padding: 8%; */
