@@ -17,6 +17,12 @@ Exemplo:
 
 ```
 
+### Gratificações
+```
+Gostaria de agradecer a oportunidade e falar que foi uma experiência muito boa, fiz tudo que foi solicitado, mas sei que falta alguns caprichos, gostaria de ter feito mais e quero que seja o suficiente, espero que gostem bastante, gostaria muito de trabalhar com vocês.
+
+```
+
 ## Project setup
 ```
 npm install
