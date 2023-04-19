@@ -1,7 +1,7 @@
 <template>
-  <form>
+  <div id="form"> 
     <slot></slot>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-form {
+#form {
   max-width: 617px;
   padding: 1%;
   border: 1px solid #E6EAF2;

@@ -12,12 +12,12 @@
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="nome" class="form-label">Nome completo</label>
-                <input required v-model="form.nome" type="nome" class="form-control" id="nome"
+                <input required v-model="form.username" type="nome" class="form-control" id="nome"
                     placeholder="Informe seu nome completo">
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="fone" class="form-label">Celular</label>
-                <input required v-model="form.celular" type="number" class="form-control" id="fone"
+                <input required v-model="form.phone" type="number" class="form-control" id="fone"
                     data-inputmask-inputformat="(99) 99999-9999" />
             </div>
             <div class="col-md-12 inputGroup">
@@ -26,14 +26,15 @@
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="senha" class="form-label">Senha</label>
-                <input required v-model="form.senha" type="password" class="form-control" id="senha">
+                <input required v-model="form.password" type="password" class="form-control" id="senha">
                 <small class="text-muted">No mínimo 8 caracteres</small>
             </div>
             <div class="col-md-12 inputGroup">
                 <label for="senha" class="form-label">Confirmar senha</label>
-                <input @change="confirmarSenha()" required v-model="confirmacaoSenha" type="password" class="form-control" id="senha2">
+                <input @change="confirmarSenha()" required v-model="confirmacaoSenha" type="password" class="form-control"
+                    id="senha2">
                 <small v-if="!(confirmarSenha)" class="text-muted">As senhas devem ser iguais</small>
-                
+
             </div>
             <div class="col-md-12 inputGroup site-form titulo titulo-pessoal ">
                 <h2>Dados pessoais</h2>
@@ -244,14 +245,15 @@ export default {
         return {
             tipoHospedagem: 1,
             form: {
-                nome: '',
-                celular: '',
-                email: '',
-                site: '',
+                username: null,
+                phone: null,
+                email: null,
+                site: null,
                 termos: false,
-                senha: '',
+                password: null,
             },
-            confirmacaoSenha: null
+            confirmacaoSenha: null,
+
         }
     },
     created() {
@@ -267,10 +269,16 @@ export default {
             this.$router.push('Planos')
         },
         async cadastrar() {
-            await this.$store.commit('ADD_USER', { form: this.form, hospedagem: this.tipoHospedagem })
+            try {
+                await this.axios.post('https://fakestoreapi.com/users', this.form).then((response) => {
+                    this.$store.commit('ADD_USER', { form: JSON.parse(response.config.data), hospedagem: this.tipoHospedagem, })
+                    this.$router.push('login')
+                })
+            } catch (error) {
+                console.log(error);
+            }
         },
         validarSenha() {
-
         }
     },
 
@@ -473,15 +481,16 @@ button {
     .cadastro {
         flex-direction: column;
     }
-    .card{
+
+    .card {
         width: 100%;
     }
 
-    .listagem{
+    .listagem {
         display: none;
     }
 
-    .hospedagem{
+    .hospedagem {
         order: -1;
         margin-bottom: 4%;
     }

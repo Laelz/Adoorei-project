@@ -15,7 +15,7 @@
     </div>
     <div class="conta-hospedagem">
       <div class="identificacao">
-        <h2> Olá, {{ this.$store.state.currentUser.nome }}
+        <h2> Olá, {{ this.$store.state.currentUser.username }}
         </h2>
         <p>
           Seja bem vindo a sua conta de hospedagem.
@@ -35,18 +35,12 @@ export default {
   name: 'ViewInicio',
   data() {
     return {
-      user: {
-        email: '',
-        nome: 'Lael',
-        senha: '',
-      }
     }
   },
   methods: {
     sair() {
       this.$router.push('Login')
       this.$store.commit('logout')
-
     }
   },
 }

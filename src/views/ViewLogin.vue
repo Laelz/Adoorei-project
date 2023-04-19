@@ -9,22 +9,35 @@
     </div>
     <div class="col-md-12 inputGroup">
       <label for="email" class="form-label">E-mail</label>
-      <input v-model="form.email" type="email" class="form-control" id="email" placeholder="Seu e-mail">
+      <input v-model="form.username" type="text" class="form-control" id="email" placeholder="Seu e-mail">
+      <small v-if="incorreto" class="text-muted">Usuário ou Senha incorretos</small>
     </div>
     <div class="col-md-12 inputGroup">
       <label for="senha" class="form-label">Senha</label>
-      <input v-model="form.senha" type="password" class="form-control" id="senha" placeholder="Sua senha">
+      <input v-model="form.password" type="password" class="form-control" id="senha" placeholder="Sua senha">
     </div>
     <div class="col-md-12 esqueciSenha">
       <a href="/">Esqueci minha senha</a>
     </div>
     <div class="col-md-12 inputGroup">
-      <button :disabled="!(form.email && form.senha)" @click="login()" class="btn">FAZER LOGIN</button>
+      <button :disabled="!(form.username && form.password)" @click="login()" class="btn">FAZER LOGIN</button>
     </div>
   </CustomForm>
   <div class="col-md-12 cadastrar">
     <p>Ainda não tem conta?</p>
     <router-link to="/planos">Cadastre-se</router-link>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">ERROR</strong>
+        <small>11 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,24 +51,30 @@ export default {
   },
   data() {
     return {
-      form:{
-        email: null, 
-        senha: null,
-      }
+      form: {
+        username: null,
+        password: null,
+      },
+      incorreto: false,
     }
   },
   methods: {
-    login() {
-      console.log(this.form);
-      // this.$store.commit('login', this.form)
-      this.$router.push('Inicio')
+    async login() {
+      try {
+        await this.axios.post('https://fakestoreapi.com/auth/login', this.form).then((response) => {
+          this.$store.commit('login', { form: this.form, token: response.token })
+        })
+        this.$router.push('Inicio')
+      } catch (error) {
+        this.incorreto = true
+        console.log(error);
+      }
     }
   },
 }
 </script>
 
 <style>
-
 .login {
   margin: auto;
 }

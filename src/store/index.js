@@ -3,37 +3,28 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     users: [],
-    currentUser: {
-      nome: 'Lael',
-      email: 'lael@lael.com',
-    }
+    currentUser: null,
+    token: null,
   },
   getters: {
     getCurrentUser(state) {
       return state.currentUser
     },
     getLetra(state) {
-      return state.currentUser.nome.substring(0, 1)
+      return state.currentUser.username.substring(0, 1)
     }
   },
   mutations: {
     async login(state, data) {
-      console.log(state);
-      const user = await state.users.find((user) => user.email === data.email)[0]
-      if (user.email) {
-        state.currentUser = user
-      } else {
-        state.currentUser = {}
-      }
-      this.$router.push('Inicio')
+      state.currentUser = data.form
+      state.token = data.token
     },
     ADD_USER(state, data) {
-      console.log(state);
-      console.log(data);
       state.users.push(data)
     },
     logout(state) {
-      state.currentUser = {}
+      state.currentUser = null
+      state.token = null
       console.log(state);
     }
   },
